@@ -1,0 +1,9 @@
+---
+BGP:
+  ASN: "65010"
+  peers:
+    - neighbor: "10.10.0.2"
+      peer_asn: "65008"
+
+    - neighbor: "10.10.0.4"
+      peer_asn: "65009"

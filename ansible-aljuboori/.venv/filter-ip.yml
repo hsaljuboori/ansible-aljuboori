@@ -1,0 +1,19 @@
+---
+- name: "Flter ip addr"
+  hosts: "192.168.86.23"
+
+
+  tasks:
+    - name: " filter ip addr example"
+      vars:
+         myip: 
+           - "192.168.86.1/23"
+           - "200a:abd:65::1/64"
+           - "10.10.10.10/24"
+           - "192.168.777.1"
+      debug: 
+         #msg: "{{ myip | ipaddr }}"
+         #msg: "{{ myip | ipv4 }}"
+         #msg: "{{ myip | ipaddr('address') }}"
+         msg: "{{ myip | ipaddr('network') }}"
+         

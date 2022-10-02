@@ -1,0 +1,15 @@
+---
+BGP:
+  ASN: "65009"
+  peers:
+    - neighbor: "10.10.0.0"
+      peer_asn: "65008"
+
+    - neighbor: "10.10.0.5"
+      peer_asn: "65010"
+
+eigrp_style: "named"
+
+eigrp: 
+  asn: "9"
+  name: "R9"
