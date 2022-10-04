@@ -1,0 +1,29 @@
+---
+
+
+- name: "PLAYBOOK EIGRP STUFF"
+  hosts: 192.168.86.23
+  connection: network_cli
+
+  tasks:
+
+
+    - name: "Task 1"
+      cisco.ios.ios_config:
+        src: "eigrp.j2"
+      register: "eigrp_result" 
+
+    -  name: "Task 2 - print EIGRP config"
+       debug:
+         msg: "{{ eigrp_result }}"
+
+    - name: "Task 3 - verfiy IEIGRP config"
+      cisco.ios.ios_command:
+        commands:
+          - "show run | section eigrp"
+          - "show ip arp"
+      register: "eigrp_show_output"
+
+    - name: "Task 4"
+      debug:
+        msg: "{{ eigrp_show_output }}"
