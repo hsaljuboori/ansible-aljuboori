@@ -1,0 +1,15 @@
+---
+- name: "Printing some var info"
+  hosts: qa
+  gather_facts: false
+  connection: network_cli
+
+  
+
+  tasks:
+    - name: "Parse ntp var stuff"
+      debug:
+        msg: "{{ hostvars[ansible_host]['ntp'] }}"
+    - name: "Parse rid var stuff"
+      debug:
+        msg: " This device router-id is {{ hostvars[ansible_host]['ospf']['rid'] }}" 

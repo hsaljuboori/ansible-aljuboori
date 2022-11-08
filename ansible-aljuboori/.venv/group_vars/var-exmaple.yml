@@ -1,0 +1,22 @@
+---
+- name: "Play to Test some variable substition"
+  hosts: qa
+  gather_facts: true
+  connection: network_cli
+
+
+  # tasks:
+  # - name: " Test-1"
+  #   cisco.ios.ios_config:
+  #     src: "configs/bgp-configs/bgp.j2"
+  
+
+  # tasks:
+  # - name: " Test-2 Dynamaic lookup"
+  #   cisco.ios.ios_config:
+  #     src: "configs/eigrp-configs/{{ eigrp_style }}.j2"
+
+  tasks:
+  - name: " Test-3 j2 loop"
+    cisco.ios.ios_config:
+      src: "bgp.j2"  

@@ -26,3 +26,14 @@ eigrp:
     - "10.0.0.0 0.255.255.255"
     - "192.168.86.0 0.0.0.255"
     - "8.8.8.8 0.0.0.0"
+ospf:
+  id: "99"
+  rid: "8.8.8.8"
+  default_originate: true
+  networks:
+    - network: "8.8.0.0"
+      wildcard: "0.0.255.255"
+      area: "0"
+    - network: "8.8.8.8"
+      wildcard: "0.0.0.0"
+      area: "0"
