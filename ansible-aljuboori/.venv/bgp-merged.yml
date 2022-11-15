@@ -1,0 +1,26 @@
+---
+- name: "BGP Playbook"
+  hosts: all
+  gather_facts: false
+  connection: network_cli
+
+  tasks:
+   - name: "Push Ciso BGP Config"
+      cisco.ios.ios_bgp:
+         config:
+           bgp_as: "{{ BGP.ASN }}"
+           router_id: "{{ ospf.rid }}"
+           log_neighbor_changes: true
+           neighbors:
+             - neighbor: "{{ item.neighbor }}"
+               remote_as: "{{ item.peer_asn }}"
+
+         operation: merge
+      register : cisco_output
+      when: "ansible_network_os == 'cisco.ios.ios'"
+      Loop: " {{ BGP.peers }}"
+
+    - name: "Print Cisco OSPF Config"
+      debug:
+        msg: " {{ cisco_output }}"
+      when: "ansible_network_os == 'cisco.ios.ios'"

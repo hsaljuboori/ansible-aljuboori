@@ -12,10 +12,11 @@ BGP:
   peers:
     - neighbor: "10.10.0.1"
       peer_asn: "65009"
-
     - neighbor: "10.10.0.3"
-    
       peer_asn: "65010"
+  networks:
+    - network: "8.8.8.8"
+      mask: "255.255.255.255"
 
 eigrp_style: "normal"
 

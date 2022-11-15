@@ -7,6 +7,9 @@ BGP:
 
     - neighbor: "10.10.0.4"
       peer_asn: "65009"
+  networks:
+    - network: "10.10.10.10"
+      mask: "255.255.255.255"
 
 ospf:
   id: "99"

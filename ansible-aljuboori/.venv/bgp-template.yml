@@ -1,0 +1,17 @@
+---
+- name: "BGP Config via Jinja"
+  hosts: all
+  gather_facts: false
+  connection: network_cli
+
+  tasks:
+    - name: "Push Cisco BGP Config"
+      cisco.ios.ios_config:
+        src: "bgp.j2"
+      register : cisco_output
+      when: "ansible_network_os == 'cisco.ios.ios'"
+
+    - name: "Print Cisco BGP Config"
+      debug:
+        msg: " {{ cisco_output }}"
+      when: "ansible_network_os == 'cisco.ios.ios'"

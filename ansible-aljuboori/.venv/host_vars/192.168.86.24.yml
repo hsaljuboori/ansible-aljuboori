@@ -7,6 +7,9 @@ BGP:
 
     - neighbor: "10.10.0.5"
       peer_asn: "65010"
+  networks:
+    - network: "9.9.9.9"
+      mask: "255.255.255.255"
 
 eigrp_style: "named"
 
