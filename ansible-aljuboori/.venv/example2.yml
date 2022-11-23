@@ -1,0 +1,19 @@
+---
+- name: "OSPF Playbook"
+  hosts: all
+  gather_facts: false
+  connection: network_cli
+
+  tasks:
+    - name: "Push Cisco OSPF Config"
+      napalm_get_facts:
+         hostname: "{{ inventory_hostname }}"
+         username: "{{ ansible_user }}"
+         password: "{{ ansible_password }}"
+         dev_os: "{{ napalm_platform }}"
+         filter: ["interfaces_ip"]
+      register: result
+    - name: "Print Cisco OSPF Config"
+      debug:
+        msg: " {{ result }}"
+        

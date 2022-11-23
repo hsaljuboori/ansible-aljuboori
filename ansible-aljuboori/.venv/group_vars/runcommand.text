@@ -1,3 +1,0 @@
-ansible-playbook -u admin -k -e ansible_network_os=ios bannerconf.yml 
-ansible qa -m raw -c paramiko -a "show ip int bri"
-

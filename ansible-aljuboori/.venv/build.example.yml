@@ -1,0 +1,43 @@
+---
+- name: "Test Playbook"
+  hosts: localhost
+
+  tasks:
+    - name: "Collect facts about local host"
+      ansible.builtin.setup:
+        filter:
+          - "ansible_date_time"
+            #gather_subset:
+            #- "min"
+      register: output 
+
+    - name: "print"
+      debug:
+        msg: "{{ output }}"
+
+    - name: "Task2: Recodfing variable"
+      set_fact:
+        TD: "{{ ansible_date_time.date }}"
+    - name: "Creating directories"
+      file:
+        path: "Backups/{{ TD }}"
+        state: directory 
+      run_once: true
+
+- name: "Play2: Backing Up Configuration"
+  hosts: all 
+  connection: network_cli
+  gather_facts: False
+
+  tasks:
+    - name: "Task1 of Play2: Pull configation from Remote Device"
+      napalm_get_facts:
+        hostname: "{{ inventory_hostname }}"
+        username: "{{ ansible_user }}"
+        password: "{{ ansible_password }}"
+        dev_os: "{{ napalm_platform }}"
+
+
+
+
+    

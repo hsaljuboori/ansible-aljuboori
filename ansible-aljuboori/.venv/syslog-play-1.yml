@@ -1,0 +1,35 @@
+---
+- name: "Play 1- Target Cisco Devies"
+  hosts: cisco
+  gather_facts: false
+  connection: network_cli
+
+  tasks:
+    - name: "Push Cisco Syslog Config"
+      cisco.ios.ios_logging_global:
+        config:
+          buffered:
+            severity: notifications
+            size: 5099
+            xml: True
+          console:
+            severity: critical
+            xml: True
+          facility: local5
+          hosts:
+            - hostname: 172.16.1.12
+            - hostname: 172.16.1.11
+              xml: True
+            - hostname: 172.16.1.10
+              filtered: True
+              stream: 10
+            - hostname: 172.16.1.13
+              transport:
+                tcp:
+                  port: 514
+
+      register : cisco_output
+
+    - name: "Print Cisco Config"
+      debug:
+        msg: " {{ cisco_output }}"
