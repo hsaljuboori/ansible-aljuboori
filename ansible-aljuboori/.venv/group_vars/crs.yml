@@ -1,0 +1,5 @@
+---
+ansible_user: "admin"
+ansible_password: "Iraq@1234"
+ansible_network_os: "cisco.iosxr.iosxr"
+napalm_platform: "ios"
