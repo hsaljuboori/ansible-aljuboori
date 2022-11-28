@@ -1,0 +1,55 @@
+---
+- name: "Play 1: Testing RESTCONF"
+  hosts: crs
+  connection: local
+
+  tasks:
+    - name: "Task 1- Pull some info"
+      uri:
+        url: "https://{{ ansible_host}}/restconf/data/native"
+        user: "{{ ansible_user }}"
+        password: "{{ ansible_password }}"
+        method: GET
+        return_content: true
+        headers:
+          Accept: "application/yang-data+json"
+        validate_certs: false
+      register: result_task1
+
+    - name: "Task 2- Pull some info"
+      uri:
+        url: "https://{{ ansible_host}}/restconf/data/native/router"
+        user: "{{ ansible_user }}"
+        password: "{{ ansible_password }}"
+        method: GET
+        return_content: true
+        headers:
+          Accept: "application/yang-data+json"
+        validate_certs: false
+      register: result_task2
+
+    - name: "Task 3- Pull some info"
+      uri:
+        url: "https://{{ ansible_host}}/restconf/data/native/ip/access-list"
+        user: "{{ ansible_user }}"
+        password: "{{ ansible_password }}"
+        method: GET
+        return_content: true
+        headers:
+          Accept: "application/yang-data+json"
+        validate_certs: false
+      register: result_task3
+
+    - name: "Task 4- Print Result"
+      debug:
+        msg: "{{ result_task1.json }}"
+
+    - name: "Task 5- Print Result"
+      debug:
+        msg: "{{ result_task2.json }}"
+
+    - name: "Task 6- Print Result"
+      debug:
+        msg: "{{ result_task3.json }}"
+
+        
